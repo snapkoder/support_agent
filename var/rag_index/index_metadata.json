@@ -1,0 +1,19 @@
+{
+  "corpus_hash": "21d63b2d317bd0a2c3759e6848438d5a",
+  "total_chunks": 115,
+  "total_documents": 3,
+  "created_at": "2026-03-03T01:39:21.640958",
+  "updated_at": "2026-03-04T20:41:55.819976",
+  "version": "1.0",
+  "config_hash": "71c6c3d23bdef7f14621f3c8306fa7c2",
+  "embedding_signature": {
+    "provider": "local",
+    "model_name": "tfidf",
+    "dimensions": 384,
+    "normalize": true
+  },
+  "adapter_name": "LocalEmbeddingsAdapter",
+  "store_type": "chroma",
+  "collection_name": "jota_kb",
+  "index_path": "./var/rag_index\\chroma"
+}

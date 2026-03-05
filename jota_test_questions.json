@@ -1,0 +1,282 @@
+[
+  {
+    "agent": "atendimento_geral",
+    "id": "AG01",
+    "question": "Como faço para acessar minha conta do Jota?",
+    "expected_answer": "Para acessar a sua conta, é só falar com o Jota através do número 55 11 4004-8006! Todas as funcionalidades podem ser utilizadas por lá!",
+    "requires_rag": false
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG02",
+    "question": "Quero abrir uma conta",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Para abrir sua conta digital, é só entrar em contato com o Jota pelo número (11) 4004-8006 e seguir o passo a passo informado durante a conversa no WhatsApp.",
+    "requires_rag": false
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG03",
+    "question": "Qual o limite de PIX sem senha?",
+    "expected_answer": "Por segurança, todas as transações do Jota são autorizadas com senha, independentemente do valor. Começamos com um limite inicial bem alto e o limite vai aumentando conforme o uso. É possível solicitar aumento de limite também.",
+    "requires_rag": true
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG04",
+    "question": "Fui vítima de um golpe",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Sinto muito pelo ocorrido. Para te ajudar, preciso de algumas informações...",
+    "requires_rag": false
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG05",
+    "question": "Não consigo fazer meu cadastro",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Entendi! Para te ajudar, pode me dizer a mensagem ou erro que aparece?",
+    "requires_rag": false
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG06",
+    "question": "O Jota tem cartão de crédito?",
+    "expected_answer": "Ainda não está disponível o cartão de crédito do Jota. Quando lançarmos, o Jota entrará em contato. Posso ajudar com mais alguma coisa?",
+    "requires_rag": true
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG07",
+    "question": "Como funciona o Jota?",
+    "expected_answer": "O Jota é um assistente financeiro que funciona 100 pelo WhatsApp. Você pode fazer Pix e pagar boletos através de mensagens de texto, áudio ou até imagem e documentos PDF. Também gera cobranças via QR Code Pix. Tudo isso totalmente gratuito, sem taxas. Para usar, é só conversar com o Jota pelo (11) 4004-8006.",
+    "requires_rag": true
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG08",
+    "question": "Preciso encerrar minha conta",
+    "expected_answer": "Entendi que você quer encerrar a conta. Antes de prosseguirmos, gostaria de saber se há algum motivo específico? Talvez eu possa te ajudar com alguma dificuldade.",
+    "requires_rag": false
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG09",
+    "question": "Não consigo conectar meu banco",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Entendi! Vamos verificar juntos...",
+    "requires_rag": false
+  },
+  {
+    "agent": "atendimento_geral",
+    "id": "AG10",
+    "question": "Qual o horário de atendimento?",
+    "expected_answer": "Segunda a Sexta: 8:30 às 20h. Sábados, Domingos e feriados: 9h às 20h. Ainda não oferecemos suporte 24 horas.",
+    "requires_rag": true
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC11",
+    "question": "Quero abrir uma conta pessoa jurídica",
+    "expected_answer": "Para abrir uma conta PJ no Jota, é necessário utilizar um número de celular que não tenha o Jota cadastrado. Se você tiver um número em que não está utilizando o Jota, é só seguir este passo-a-passo: 1. Chame o Jota no número (11) 4004-8006. 2. Envie o CNPJ do responsável (sócio). 3. Faça a etapa de validação da sua identidade.",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC12",
+    "question": "A câmera não abre durante o cadastro",
+    "expected_answer": "Entendi! Para te ajudar, pode me dizer qual o modelo do seu aparelho?",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC13",
+    "question": "Já enviei meu documento mas ainda não foi aprovado",
+    "expected_answer": "Olá! Aqui é o canal oficial do Jota. Percebi que você tinha sido solicitado de reenviar o documento e obrigado por ter enviado. Irei fazer a análise do seu documento agora e ver se é possível seguir com o cadastro da sua conta.",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC14",
+    "question": "Quero usar outro CPF na minha conta",
+    "expected_answer": "Vi que você já tem uma conta com outro CPF. No Jota, você só consegue ter uma conta por número de celular. Qual é a conta que você gostaria de ter? Lembrando que será necessário fazer a validação facial desse CPF.",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC15",
+    "question": "Erro ao validar meu email",
+    "expected_answer": "Para o email utilizado no cadastro, você deve utilizar um E-mail válido. Se não, o cadastro não poderá ser concluído. Você pode checar, e tentar novamente por favor?",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC16",
+    "question": "Posso abrir conta para meu filho de 16 anos?",
+    "expected_answer": "Infelizmente, ainda não trabalhamos com contas para menores de 18 anos, mas estamos trabalhando nisso! Você precisará completar 18 anos para abrir sua conta. Quando você completa?",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC17",
+    "question": "Quero trocar minha conta PF para PJ",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Entendi! Você já tem uma conta conosco na Pessoa Física. Precisariamos encerrar a sua conta para poder habilitar o seu número para abrir uma nova conta no Jota. O que você acha de encerrar essa sua conta agora?",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC18",
+    "question": "Erro com CPF irregular",
+    "expected_answer": "Pode deixar, o time está analisando e já vai trazer uma solução para você!",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC19",
+    "question": "Tentei com passaporte mas não aceitou",
+    "expected_answer": "Olá! Você está falando com o suporte do Jota. Sinto muito pela frustração. Peço desculpas, mas no momento, o Jota exige documentos oficiais como RG, CNH ou CIN (Carteira de Identidade Nacional) ou RNE para concluir o cadastro.",
+    "requires_rag": false
+  },
+  {
+    "agent": "criacao_conta",
+    "id": "CC20",
+    "question": "Minha conta foi criada?",
+    "expected_answer": "Olá! Você está falando com o suporte do Jota. Entendo sua dúvida! Para verificar se sua conta foi criada e está ativa, você pode entrar em contato diretamente com o Jota pelo número (11) 4004-8006.",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF21",
+    "question": "Como funciona o Open Finance no Jota?",
+    "expected_answer": "O Open Finance no Jota permite que você conecte contas bancárias/digitais de outros bancos diretamente dentro da plataforma. Ao ativar, você pode ver o saldo e extrato de suas contas, pagar boletos e enviar Pix usando o saldo de qualquer banco conectado, tudo de forma segura. Para começar, é só dizer: 'Jota, quero conectar o meu banco NOME'.",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF22",
+    "question": "Não consigo conectar minha conta do Nubank",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Entendi! Vamos verificar juntos. Primeiro, vamos tentar uma solução rápida: parece que você está com problema no acesso a página e pode ser que o WhatsApp não esteja funcionando bem. Você poderia clicar nos 3 pontos e depois clicar em copiar link?",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF23",
+    "question": "Quais bancos posso conectar?",
+    "expected_answer": "Você consegue conectar tanto contas PF quanto PJ via Open Finance. Os principais bancos compatíveis incluem: Itaú, Nubank, Santander, Caixa, Bradesco, Banco do Brasil, C6, Inter, BTG Pactual, XP, Sicredi, Sicoob, Mercado Pago (conta), PagBank (conta), Stone (conta PJ), entre outros. Importante: apenas contas bancárias/digitais têm integração, não maquininhas.",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF24",
+    "question": "O app do meu banco está oculto, isso impede a conexão?",
+    "expected_answer": "Para conectar via Open Finance, o aplicativo do banco precisa estar visível (não oculto) e no mesmo celular do WhatsApp. Você pode verificar se o app está em alguma pasta de segurança ou oculto? Depois de tornar o app visível, tente conectar novamente pelo Jota.",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF25",
+    "question": "Posso ver o extrato do meu banco conectado?",
+    "expected_answer": "Sim! Com o Open Finance você pode ver o saldo e extrato de suas contas de outros bancos, tudo em um só lugar dentro do Jota. Você também pode pagar boletos e enviar Pix usando o saldo de qualquer banco conectado.",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF26",
+    "question": "Erro durante cadastro ao acessar conta bancária",
+    "expected_answer": "Entendi! Vamos tentar outra coisa. Tente trocar a rede: se está usando WiFi, mude para dados móveis, ou vice-versa. Me avise se conseguir avançar!",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF27",
+    "question": "Posso conectar conta PJ do banco na minha conta PF do Jota?",
+    "expected_answer": "Para conectar via Open Finance, a conta do banco precisa ser do mesmo tipo da sua conta Jota. Se você tem conta PF no Jota, só pode conectar contas PF. Se tem conta PJ, só pode conectar contas PJ. Você está tentando conectar uma conta do mesmo tipo?",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF28",
+    "question": "Tentei conectar pelo app do banco direto",
+    "expected_answer": "Certo! O processo sempre começa pelo WhatsApp do Jota, não pelo app do banco. Envie 'Quero conectar a banco no Jota' para o (11) 4004-8006. O Jota vai te orientar e, quando necessário, você será redirecionado para o app do banco para confirmar.",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF29",
+    "question": "Como vejo o saldo da minha conta Caixa conectada?",
+    "expected_answer": "Para ver o saldo da sua conta Caixa conectada, você pode pedir diretamente ao Jota no número (11) 4004-8006. Basta falar algo como 'Jota, qual o saldo da minha conta Caixa'.",
+    "requires_rag": false
+  },
+  {
+    "agent": "open_finance",
+    "id": "OF30",
+    "question": "Já tentei tudo e nada funciona, estou cansado",
+    "expected_answer": "Peço desculpas pela dificuldade que você está enfrentando. Entendo sua frustração e a urgência de resolver isso. Vou escalar seu caso para uma análise mais detalhada e retornarei em breve com uma solução.",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM31",
+    "question": "Cai em um golpe pelo Pix",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Sinto muito pelo ocorrido. Para te ajudar, preciso de algumas informações: Qual foi o valor envolvido? Para onde o dinheiro foi enviado? Pode me contar brevemente o que aconteceu? Qual a data e horário da transação?",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM32",
+    "question": "O que é MED?",
+    "expected_answer": "MED é o Mecanismo Especial de Devolução, do Banco Central. Basicamente, a gente pede pro banco que recebeu o seu dinheiro fazer a devolução quando tem suspeita de fraude ou golpe.",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM33",
+    "question": "O BO é obrigatório para contestar o Pix?",
+    "expected_answer": "Sim, ele é necessário pra dar sequência. Mas fica tranquilo que dá pra fazer tudo online pela Delegacia Eletrônica do seu estado, é bem rápido e não precisa ir presencialmente.",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM34",
+    "question": "Mandei Pix errado, digitei a chave errada",
+    "expected_answer": "Deixa eu confirmar: você que digitou errado, ou o Jota entendeu errado o que você pediu?",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM35",
+    "question": "Comprei produto que não chegou",
+    "expected_answer": "Sinto muito pelo ocorrido. Para te ajudar com o MED, preciso saber: qual foi o valor? Para onde você mandou (chave Pix)? Quando foi isso?",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM36",
+    "question": "Quanto tempo demora o MED?",
+    "expected_answer": "O banco tem até 7 dias úteis pra analisar. Se aceitar, a devolução é automática. Mas importante: só volta se ainda tiver saldo na conta de lá, tá?",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM37",
+    "question": "O MED é garantido?",
+    "expected_answer": "Olha, não consigo te garantir que vai ser aceito porque depende da análise do banco de lá. Mas a gente tá coletando todas as informações e provas pra fazer um pedido bem forte e aumentar as chances.",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM38",
+    "question": "Emprestei dinheiro pro meu amigo e ele não devolve",
+    "expected_answer": "Entendi. Preciso te avisar algo importante: Podemos abrir o MED para tentar recuperar o valor, mas se o banco recebedor aceitar o pedido, seu amigo pode sofrer consequências legais por fraude. Você já tentou resolver diretamente com ele?",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM39",
+    "question": "Preciso bloquear minha conta, invadiram",
+    "expected_answer": "Olá! Esse é o canal oficial de atendimento do Jota. Entendo completamente a urgência da situação e sinto muito pelo ocorrido. Vou chamar imediatamente uma equipe dedicada para analisar seu caso e tomar as medidas necessárias para proteger sua conta. Você receberá retorno em breve.",
+    "requires_rag": false
+  },
+  {
+    "agent": "golpe_med",
+    "id": "GM40",
+    "question": "Recebi um Pix que não reconheço",
+    "expected_answer": "Ao receber um Pix de origem desconhecida e desejar realizar o estorno, confira no seu extrato se aparece o nome, CPF ou chave do remetente. Se não constar, posso chamar alguém para te ajudar. Você deseja que eu chame?",
+    "requires_rag": false
+  }
+]

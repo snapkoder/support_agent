@@ -1,0 +1,301 @@
+# 🚀 DOCKER COMPOSE - PRODUÇÃO
+# Jota Support Agent - Configuração Enterprise para Produção
+
+version: '3.8'
+
+services:
+  # ===========================================
+  # 🤖 APLICAÇÃO PRINCIPAL
+  # ===========================================
+  jota-support-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: jota-support-agent-prod
+    restart: unless-stopped
+    ports:
+      - "${JOTA_PORT:-8000}:8000"
+    environment:
+      # Ambiente
+      - JOTA_ENV=production
+      - JOTA_DEBUG=false
+      
+      # Segurança
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - MASTER_PASSWORD=${MASTER_PASSWORD}
+      
+      # Bancos de dados
+      - REDIS_PRIMARY_HOST=redis-primary
+      - REDIS_PRIMARY_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_SSL=false
+      - REDIS_REPLICA_HOST=redis-replica
+      - REDIS_REPLICA_PORT=6379
+      - REDIS_CACHE_HOST=redis-cache
+      - REDIS_CACHE_PORT=6379
+      
+      - POSTGRES_HOST=postgres-primary
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=jota_history
+      - POSTGRES_USER=jota_user
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_SSL=false
+      
+      - CHROMA_HOST=chroma-primary
+      - CHROMA_PORT=8000
+      - CHROMA_API_KEY=${CHROMA_API_KEY}
+      
+      # APIs externas
+      - JOTA_CONNECTORS_USE_MOCK=false
+      - JOTA_CUSTOMER_API_URL=${JOTA_CUSTOMER_API_URL}
+      - JOTA_CUSTOMER_API_KEY=${JOTA_CUSTOMER_API_KEY}
+      - JOTA_FINANCIAL_API_URL=${JOTA_FINANCIAL_API_URL}
+      - JOTA_FINANCIAL_API_KEY=${JOTA_FINANCIAL_API_KEY}
+      - JOTA_TICKET_API_URL=${JOTA_TICKET_API_URL}
+      - JOTA_TICKET_API_KEY=${JOTA_TICKET_API_KEY}
+      - JOTA_API_TIMEOUT=30.0
+      - JOTA_API_MAX_RETRIES=3
+      
+      # Inteligência artificial
+      - JOTA_CONFIDENCE_THRESHOLD=${JOTA_CONFIDENCE_THRESHOLD:-0.7}
+      - JOTA_USE_VECTOR_RAG=true
+      
+      # Telemetria
+      - JOTA_TELEMETRY_ENABLED=true
+      - JOTA_METRICS_EXPORT_INTERVAL=60
+      - JOTA_ALERT_WEBHOOK_URL=${JOTA_ALERT_WEBHOOK_URL}
+      
+      # Performance
+      - JOTA_RATE_LIMIT_REQUESTS=1000
+      - JOTA_RATE_LIMIT_WINDOW=3600
+      - JOTA_DB_POOL_SIZE=20
+      - JOTA_CACHE_TTL=300
+      
+      # Logging
+      - JOTA_LOG_LEVEL=INFO
+      - JOTA_LOG_FORMAT=json
+      
+      # WhatsApp
+      - JOTA_WHATSAPP_NUMBER=${JOTA_WHATSAPP_NUMBER}
+      - JOTA_WHATSAPP_TOKEN=${JOTA_WHATSAPP_TOKEN}
+      
+      # CORS
+      - JOTA_CORS_ORIGINS=${JOTA_CORS_ORIGINS:-https://app.jota.com}
+      
+      # Backup
+      - JOTA_AUTO_BACKUP_ENABLED=true
+      - JOTA_BACKUP_INTERVAL=3600
+      - JOTA_BACKUP_RETENTION_DAYS=30
+    
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    
+    depends_on:
+      - redis-primary
+      - redis-replica
+      - redis-cache
+      - postgres-primary
+      - chroma-primary
+    
+    networks:
+      - jota-network
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ===========================================
+  # 🟥 REDIS CLUSTER - Session Memory
+  # ===========================================
+  redis-primary:
+    image: redis:7-alpine
+    container_name: jota-redis-primary
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis-primary-data:/data
+      - ./config/redis-primary.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - jota-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  redis-replica:
+    image: redis:7-alpine
+    container_name: jota-redis-replica
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    command: redis-server --replicaof redis-primary 6379 --requirepass ${REDIS_PASSWORD}
+    depends_on:
+      - redis-primary
+    networks:
+      - jota-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  redis-cache:
+    image: redis:7-alpine
+    container_name: jota-redis-cache
+    restart: unless-stopped
+    ports:
+      - "6381:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-cache-data:/data
+    networks:
+      - jota-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # ===========================================
+  # 🟦 POSTGRESQL - History Memory
+  # ===========================================
+  postgres-primary:
+    image: postgres:15-alpine
+    container_name: jota-postgres-primary
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=jota_history
+      - POSTGRES_USER=jota_user
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - postgres-primary-data:/var/lib/postgresql/data
+      - ./config/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - jota-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jota_user -d jota_history"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ===========================================
+  # 🟪 CHROMADB - Knowledge Memory
+  # ===========================================
+  chroma-primary:
+    image: chromadb/chroma:latest
+    container_name: jota-chroma-primary
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+      - CHROMA_LOG_LEVEL=INFO
+    volumes:
+      - chroma-primary-data:/chroma/chroma
+    networks:
+      - jota-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===========================================
+  # 📊 PROMETHEUS - Monitoramento
+  # ===========================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: jota-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - jota-network
+
+  # ===========================================
+  # 📈 GRAFANA - Dashboards
+  # ===========================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: jota-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+    networks:
+      - jota-network
+    depends_on:
+      - prometheus
+
+  # ===========================================
+  # 🔍 NGINX - Reverse Proxy
+  # ===========================================
+  nginx:
+    image: nginx:alpine
+    container_name: jota-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - jota-support-agent
+    networks:
+      - jota-network
+
+# ===========================================
+# 📁 VOLUMES PERSISTENTES
+# ===========================================
+volumes:
+  redis-primary-data:
+    driver: local
+  redis-cache-data:
+    driver: local
+  postgres-primary-data:
+    driver: local
+  chroma-primary-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+# ===========================================
+# 🌐 REDES
+# ===========================================
+networks:
+  jota-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

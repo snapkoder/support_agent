@@ -1,0 +1,23 @@
+{
+  "build_timestamp": 1772667715.849377,
+  "build_time_seconds": 0.16808390617370605,
+  "result": {
+    "success": true,
+    "chunks_created": 115,
+    "documents_processed": 3,
+    "build_time_ms": 168.08390617370605,
+    "rebuild_needed": true,
+    "corpus_hash": "21d63b2d317bd0a2c3759e6848438d5a",
+    "config_hash": "71c6c3d23bdef7f14621f3c8306fa7c2"
+  },
+  "health_status": {
+    "knowledge_base": true,
+    "embeddings": true,
+    "vector_store": true
+  },
+  "config": {
+    "chunk_size": 500,
+    "chunk_overlap": 50,
+    "index_dir": "./var/rag_index"
+  }
+}

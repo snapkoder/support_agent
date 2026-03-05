@@ -1,0 +1,53 @@
+# JOTA SUPPORT AGENT - DEPENDÊNCIAS ESSENCIAIS
+# Versão otimizada para produção
+
+# Framework Web
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Validação de dados
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# HTTP Client para LLMs
+httpx==0.25.2
+
+# RAG - Vector Store e Embeddings
+chromadb==0.4.18
+numpy==1.24.3
+
+# Utilitários
+python-multipart==0.0.6
+psutil>=5.9.0
+
+# LLM e variáveis de ambiente
+openai>=1.0.0,<2.0.0
+python-dotenv==1.0.0
+
+# ===========================================
+# OPTIONAL DEPENDENCIES (NOT REQUIRED FOR CURRENT RUNTIME)
+# These dependencies were removed to reduce Docker image size.
+# They can be re-enabled if the corresponding features are implemented.
+# ===========================================
+
+# redis==5.0.1
+# Enable if distributed cache / shared session memory is implemented.
+
+# asyncpg==0.31.0
+# Enable if PostgreSQL persistence is introduced.
+
+# pyjwt==2.11.0
+# Enable if JWT authentication or token verification is implemented.
+
+# cryptography==41.0.7
+# Enable if encryption or signature verification is added.
+
+# orjson==3.9.10
+# Enable if FastAPI JSON serialization optimization is explicitly configured.
+
+# aiofiles==23.2.1
+# Enable if async file uploads or streaming file operations are implemented.
+
+# sentence-transformers==2.2.2
+# Enable ONLY if local embedding models are used.
+# WARNING: pulls torch, CUDA libs, transformers and increases image size by ~7GB.
